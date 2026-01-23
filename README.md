@@ -1,6 +1,7 @@
 # Task Manager Application
 
-**Developer:** Samuel (Sami)  
+**Developer:** [Samuel Godad](https://www.upwork.com/freelancers/~01cb5cb59103556f8a?mp_source=share)     
+
 **Challenge Completion Date:** January 23, 2026
 
 A full-stack task management application built with Django REST Framework and Next.js, containerized with Docker and orchestrated using Docker Compose.
