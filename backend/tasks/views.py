@@ -4,8 +4,10 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
+from drf_spectacular.types import OpenApiTypes
 from .models import Task
-from .serializers import TaskSerializer, UserSerializer
+from .serializers import TaskSerializer, UserSerializer, LoginSerializer, LogoutSerializer
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -25,6 +27,32 @@ class TaskViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
+@extend_schema(
+    request=UserSerializer,
+    responses={
+        201: {
+            'type': 'object',
+            'properties': {
+                'user': {'type': 'object'},
+                'refresh': {'type': 'string'},
+                'access': {'type': 'string'},
+                'message': {'type': 'string'}
+            }
+        },
+        400: {'description': 'Bad Request - Validation errors'}
+    },
+    examples=[
+        OpenApiExample(
+            'Register Example',
+            value={
+                'username': 'johndoe',
+                'email': 'john@example.com',
+                'password': 'securepass123'
+            },
+            request_only=True
+        )
+    ]
+)
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
@@ -44,6 +72,32 @@ def register(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(
+    request=LoginSerializer,
+    responses={
+        200: {
+            'type': 'object',
+            'properties': {
+                'user': {'type': 'object'},
+                'refresh': {'type': 'string'},
+                'access': {'type': 'string'},
+                'message': {'type': 'string'}
+            }
+        },
+        400: {'description': 'Bad Request - Missing credentials'},
+        401: {'description': 'Unauthorized - Invalid credentials'}
+    },
+    examples=[
+        OpenApiExample(
+            'Login Example',
+            value={
+                'email': 'john@example.com',
+                'password': 'securepass123'
+            },
+            request_only=True
+        )
+    ]
+)
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login(request):
@@ -88,6 +142,27 @@ def login(request):
         }, status=status.HTTP_401_UNAUTHORIZED)
 
 
+@extend_schema(
+    request=LogoutSerializer,
+    responses={
+        200: {
+            'type': 'object',
+            'properties': {
+                'message': {'type': 'string'}
+            }
+        },
+        400: {'description': 'Bad Request - Invalid token'}
+    },
+    examples=[
+        OpenApiExample(
+            'Logout Example',
+            value={
+                'refresh': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+            },
+            request_only=True
+        )
+    ]
+)
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def logout(request):
@@ -107,6 +182,12 @@ def logout(request):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(
+    responses={
+        200: UserSerializer,
+        401: {'description': 'Unauthorized'}
+    }
+)
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_current_user(request):

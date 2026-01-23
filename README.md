@@ -53,7 +53,7 @@ This project is a Django-based task management web application that allows users
 - **Gunicorn** - WSGI HTTP server
 
 ### Frontend
-- **Next.js 15** - React framework with App Router
+- **Next.js 16** - React framework with App Router
 - **TypeScript** - Type-safe JavaScript
 - **Tailwind CSS v4** - Utility-first CSS framework
 - **DaisyUI** - Tailwind component library
@@ -453,7 +453,7 @@ This approach provides:
 - Set up CORS for frontend communication
 
 #### Phase 2: Frontend Development
-- Initialized Next.js 16 with TypeScript
+- Initialized Next.js 16.1 with TypeScript
 - Integrated Tailwind CSS v4 and DaisyUI
 - Created authentication pages (login, register)
 - Built task dashboard with CRUD operations
@@ -584,6 +584,52 @@ Access the admin panel at http://localhost/admin to:
 
 ---
 
+## 🧪 Testing & API Documentation
+
+### Running Automated Tests
+
+The project includes 14 comprehensive test cases covering models, API endpoints, authentication, and user isolation.
+
+**Run all tests (Docker):**
+```bash
+docker-compose exec backend python manage.py test
+```
+
+**Run with verbose output:**
+```bash
+docker-compose exec backend python manage.py test --verbosity=2
+```
+
+**Test Coverage:**
+- ✅ Task model creation and validation (3 tests)
+- ✅ User registration and authentication (2 tests)
+- ✅ CRUD operations for tasks (5 tests)
+- ✅ User isolation and permissions (3 tests)
+- ✅ Status validation (1 test)
+
+### Interactive API Documentation
+
+**Swagger UI (Recommended):**
+- **Docker:** http://localhost/api/docs/
+- **Local:** http://localhost:8000/api/docs/
+
+**ReDoc (Alternative UI):**
+- **Docker:** http://localhost/api/redoc/
+- **Local:** http://localhost:8000/api/redoc/
+
+**OpenAPI Schema:**
+- **Docker:** http://localhost/api/schema/
+- **Local:** http://localhost:8000/api/schema/
+
+The Swagger UI provides:
+- 🔍 Browse all API endpoints
+- 📝 Request/response examples
+- 🔐 JWT authentication testing
+- 🧪 Test endpoints directly in browser
+- 📥 Export schema for Postman
+
+---
+
 ## Bonus Features
 
 ### Required Features ✅
@@ -596,6 +642,8 @@ Access the admin panel at http://localhost/admin to:
 - ✅ Comprehensive README with setup instructions
 
 ### Optional/Bonus Features ✅
+- ✅ **Testing Setup** - Django test framework with 14 meaningful test cases
+- ✅ **API Documentation** - Interactive Swagger/OpenAPI docs at `/api/docs/`
 - ✅ **RESTful API** with full CRUD operations
 - ✅ **Next.js Frontend** (client-requested bonus)
 - ✅ **DaisyUI Components** (client-requested bonus)
@@ -606,7 +654,6 @@ Access the admin panel at http://localhost/admin to:
 - ✅ **Production-ready Dockerfiles** with multi-stage builds
 - ✅ **Nginx reverse proxy** for proper routing
 - ✅ **Comprehensive error handling** (frontend and backend)
-- ✅ **API documentation** in README
 
 ---
 

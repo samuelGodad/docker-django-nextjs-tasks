@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'drf_spectacular',
     
     # Local apps
     'tasks',
@@ -156,6 +157,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # JWT Configuration
@@ -176,3 +178,20 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# API Documentation with drf-spectacular (Swagger/OpenAPI)
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Task Manager API',
+    'DESCRIPTION': 'RESTful API for Task Management Application with JWT Authentication',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_PATH_PREFIX': '/api',
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'persistAuthorization': True,
+        'displayOperationId': True,
+    },
+    'SWAGGER_UI_DIST': '//unpkg.com/swagger-ui-dist@5.1.0',
+    'SWAGGER_UI_FAVICON_HREF': '//unpkg.com/swagger-ui-dist@5.1.0/favicon-32x32.png',
+}

@@ -32,6 +32,17 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+class LoginSerializer(serializers.Serializer):
+    """Serializer for user login"""
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(required=True, write_only=True, style={'input_type': 'password'})
+
+
+class LogoutSerializer(serializers.Serializer):
+    """Serializer for user logout"""
+    refresh = serializers.CharField(required=True, help_text="Refresh token to blacklist")
+
+
 class TaskSerializer(serializers.ModelSerializer):
     """Serializer for Task model"""
     user = serializers.ReadOnlyField(source='user.username')
