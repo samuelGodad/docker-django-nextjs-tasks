@@ -47,15 +47,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[80vh]">
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-2xl font-bold text-center justify-center">
-            Login
+    <div className="flex items-center justify-center min-h-[80vh] px-4">
+      <div className="card w-full max-w-md bg-base-100 shadow-2xl">
+        <div className="card-body p-8">
+          <h2 className="text-3xl font-bold text-center mb-6">
+            Welcome Back
           </h2>
+          <p className="text-center text-base-content/70 mb-6">
+            Sign in to your account
+          </p>
 
           {error && (
-            <div className="alert alert-error shadow-lg">
+            <div className="alert alert-error mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -63,15 +66,15 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text font-semibold">Email Address</span>
               </label>
               <input
                 type="email"
-                placeholder="Enter your email"
-                className="input input-bordered"
+                placeholder="you@example.com"
+                className="input input-bordered input-lg w-full"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
@@ -82,12 +85,12 @@ export default function LoginPage() {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text font-semibold">Password</span>
               </label>
               <input
                 type="password"
-                placeholder="Enter your password"
-                className="input input-bordered"
+                placeholder="••••••••"
+                className="input input-bordered input-lg w-full"
                 value={formData.password}
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
@@ -96,22 +99,24 @@ export default function LoginPage() {
               />
             </div>
 
-            <div className="form-control mt-6">
+            <div className="form-control mt-8">
               <button
                 type="submit"
-                className={`btn btn-primary ${loading ? 'loading' : ''}`}
+                className={`btn btn-primary btn-lg w-full ${loading ? 'loading' : ''}`}
                 disabled={loading}
               >
-                {loading ? 'Logging in...' : 'Login'}
+                {loading ? 'Signing in...' : 'Sign In'}
               </button>
             </div>
           </form>
 
-          <div className="text-center mt-4">
-            <p className="text-sm">
+          <div className="divider my-6">OR</div>
+
+          <div className="text-center">
+            <p className="text-sm text-base-content/70">
               Don't have an account?{' '}
-              <Link href="/register" className="link link-primary">
-                Register here
+              <Link href="/register" className="link link-primary font-semibold">
+                Create one now
               </Link>
             </p>
           </div>

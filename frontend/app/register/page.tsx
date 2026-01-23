@@ -73,15 +73,18 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[80vh]">
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title text-2xl font-bold text-center justify-center">
-            Register
+    <div className="flex items-center justify-center min-h-[80vh] px-4 py-8">
+      <div className="card w-full max-w-lg bg-base-100 shadow-2xl">
+        <div className="card-body p-8">
+          <h2 className="text-3xl font-bold text-center mb-2">
+            Create Account
           </h2>
+          <p className="text-center text-base-content/70 mb-6">
+            Join us to start managing your tasks
+          </p>
 
           {error && (
-            <div className="alert alert-error shadow-lg">
+            <div className="alert alert-error mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -90,7 +93,7 @@ export default function RegisterPage() {
           )}
 
           {success && (
-            <div className="alert alert-success shadow-lg">
+            <div className="alert alert-success mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -101,12 +104,13 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Username *</span>
+                <span className="label-text font-semibold">Username</span>
+                <span className="badge badge-sm">Required</span>
               </label>
               <input
                 type="text"
-                placeholder="Choose a username"
-                className="input input-bordered"
+                placeholder="Choose a unique username"
+                className="input input-bordered input-lg w-full"
                 value={formData.username}
                 onChange={(e) =>
                   setFormData({ ...formData, username: e.target.value })
@@ -117,30 +121,35 @@ export default function RegisterPage() {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email *</span>
-                <span className="label-text-alt text-xs">You'll use this to login</span>
+                <span className="label-text font-semibold">Email Address</span>
+                <span className="badge badge-sm badge-primary">Login ID</span>
               </label>
               <input
                 type="email"
-                placeholder="your@email.com"
-                className="input input-bordered"
+                placeholder="you@example.com"
+                className="input input-bordered input-lg w-full"
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
                 required
               />
+              <label className="label">
+                <span className="label-text-alt text-xs opacity-70">
+                  💡 You'll use your email to sign in
+                </span>
+              </label>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">First Name</span>
+                  <span className="label-text font-semibold">First Name</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="First name"
-                  className="input input-bordered"
+                  placeholder="John"
+                  className="input input-bordered w-full"
                   value={formData.first_name}
                   onChange={(e) =>
                     setFormData({ ...formData, first_name: e.target.value })
@@ -150,12 +159,12 @@ export default function RegisterPage() {
 
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Last Name</span>
+                  <span className="label-text font-semibold">Last Name</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Last name"
-                  className="input input-bordered"
+                  placeholder="Doe"
+                  className="input input-bordered w-full"
                   value={formData.last_name}
                   onChange={(e) =>
                     setFormData({ ...formData, last_name: e.target.value })
@@ -166,12 +175,13 @@ export default function RegisterPage() {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password *</span>
+                <span className="label-text font-semibold">Password</span>
+                <span className="badge badge-sm">Required</span>
               </label>
               <input
                 type="password"
-                placeholder="Create a password"
-                className="input input-bordered"
+                placeholder="••••••••"
+                className="input input-bordered input-lg w-full"
                 value={formData.password}
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
@@ -179,16 +189,22 @@ export default function RegisterPage() {
                 required
                 minLength={6}
               />
+              <label className="label">
+                <span className="label-text-alt text-xs opacity-70">
+                  Minimum 6 characters
+                </span>
+              </label>
             </div>
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Confirm Password *</span>
+                <span className="label-text font-semibold">Confirm Password</span>
+                <span className="badge badge-sm">Required</span>
               </label>
               <input
                 type="password"
-                placeholder="Confirm your password"
-                className="input input-bordered"
+                placeholder="••••••••"
+                className="input input-bordered input-lg w-full"
                 value={formData.confirmPassword}
                 onChange={(e) =>
                   setFormData({ ...formData, confirmPassword: e.target.value })
@@ -197,22 +213,24 @@ export default function RegisterPage() {
               />
             </div>
 
-            <div className="form-control mt-6">
+            <div className="form-control mt-8">
               <button
                 type="submit"
-                className={`btn btn-primary ${loading ? 'loading' : ''}`}
+                className={`btn btn-primary btn-lg w-full ${loading ? 'loading' : ''}`}
                 disabled={loading}
               >
-                {loading ? 'Creating account...' : 'Register'}
+                {loading ? 'Creating account...' : 'Create Account'}
               </button>
             </div>
           </form>
 
-          <div className="text-center mt-4">
-            <p className="text-sm">
+          <div className="divider my-6">OR</div>
+
+          <div className="text-center">
+            <p className="text-sm text-base-content/70">
               Already have an account?{' '}
-              <Link href="/login" className="link link-primary">
-                Login here
+              <Link href="/login" className="link link-primary font-semibold">
+                Sign in instead
               </Link>
             </p>
           </div>

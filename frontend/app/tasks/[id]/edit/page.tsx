@@ -45,34 +45,53 @@ export default function EditTaskPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="flex flex-col justify-center items-center min-h-[60vh] gap-4">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+        <p className="text-base-content/70">Loading task...</p>
       </div>
     );
   }
 
   if (!task) {
     return (
-      <div className="text-center py-12">
-        <p className="text-xl">Task not found</p>
-        <Link href="/dashboard" className="btn btn-primary mt-4">
-          Back to Dashboard
-        </Link>
+      <div className="max-w-md mx-auto px-4">
+        <div className="card bg-base-100 shadow-xl">
+          <div className="card-body text-center py-12">
+            <div className="text-6xl mb-4">❌</div>
+            <h2 className="text-2xl font-bold mb-2">Task Not Found</h2>
+            <p className="text-base-content/70 mb-6">
+              The task you're looking for doesn't exist or has been deleted.
+            </p>
+            <Link href="/dashboard" className="btn btn-primary btn-lg gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Dashboard
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-3xl mx-auto px-4">
       <div className="flex items-center gap-4 mb-8">
-        <Link href="/dashboard" className="btn btn-ghost">
-          ← Back
+        <Link href="/dashboard" className="btn btn-ghost gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Dashboard
         </Link>
-        <h1 className="text-3xl font-bold">Edit Task</h1>
       </div>
 
-      <div className="card bg-base-100 shadow-xl">
-        <div className="card-body">
+      <div className="mb-6">
+        <h1 className="text-4xl font-bold mb-2">Edit Task</h1>
+        <p className="text-base-content/70">Update your task details below</p>
+      </div>
+
+      <div className="card bg-base-100 shadow-2xl border border-base-300">
+        <div className="card-body p-8">
           <TaskForm
             initialData={{
               title: task.title,
