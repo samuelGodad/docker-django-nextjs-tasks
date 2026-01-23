@@ -70,9 +70,11 @@ start() {
     echo ""
     print_success "Application is running!"
     echo ""
-    echo -e "  Frontend:      ${GREEN}http://localhost${NC}"
-    echo -e "  API:           ${GREEN}http://localhost/api${NC}"
-    echo -e "  Admin Panel:   ${GREEN}http://localhost/admin${NC}"
+    echo -e "  ${BLUE}Frontend:${NC}      ${GREEN}http://localhost${NC}"
+    echo -e "  ${BLUE}API:${NC}           ${GREEN}http://localhost/api${NC}"
+    echo -e "  ${BLUE}Admin Panel:${NC}   ${GREEN}http://localhost/admin${NC}"
+    echo -e "  ${BLUE}Swagger UI:${NC}    ${GREEN}http://localhost/api/docs${NC}"
+    echo -e "  ${BLUE}ReDoc API:${NC}     ${GREEN}http://localhost/api/redoc${NC}"
     echo ""
     print_info "To view logs, run: ${YELLOW}./run.sh logs${NC}"
     print_info "To stop, run: ${YELLOW}./run.sh stop${NC}"
@@ -90,9 +92,11 @@ start_no_build() {
     
     print_success "Services started successfully!"
     echo ""
-    echo -e "  Frontend:      ${GREEN}http://localhost${NC}"
-    echo -e "  API:           ${GREEN}http://localhost/api${NC}"
-    echo -e "  Admin Panel:   ${GREEN}http://localhost/admin${NC}"
+    echo -e "  ${BLUE}Frontend:${NC}      ${GREEN}http://localhost${NC}"
+    echo -e "  ${BLUE}API:${NC}           ${GREEN}http://localhost/api${NC}"
+    echo -e "  ${BLUE}Admin Panel:${NC}   ${GREEN}http://localhost/admin${NC}"
+    echo -e "  ${BLUE}Swagger UI:${NC}    ${GREEN}http://localhost/api/docs${NC}"
+    echo -e "  ${BLUE}ReDoc API:${NC}     ${GREEN}http://localhost/api/redoc${NC}"
     echo ""
 }
 
@@ -252,6 +256,9 @@ ${GREEN}URLs:${NC}
   - Frontend:     http://localhost
   - API:          http://localhost/api
   - Admin Panel:  http://localhost/admin
+  - Swagger UI:   http://localhost/api/docs
+  - ReDoc API:    http://localhost/api/redoc
+  
 
 EOF
 }
