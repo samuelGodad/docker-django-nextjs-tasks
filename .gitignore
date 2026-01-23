@@ -1,2 +1,41 @@
+# ============================================
+# Project-wide Git Ignore
+# Task Manager Application
+# ============================================
+
+# Environment variables
 .env
+.env.local
+.env*.local
+
+# Python virtual environment
 venv/
+env/
+ENV/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS Files
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+/tmp/
+
+# Docker volumes data (if any)
+postgres_data/
+
+# Task description (client's requirement doc - may want to keep this)
+# task-desription.md
