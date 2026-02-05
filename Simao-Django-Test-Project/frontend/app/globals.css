@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Ensure body takes full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Enhanced input styles */
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: hsl(var(--p));
+  box-shadow: 0 0 0 3px hsl(var(--p) / 0.2);
+}
+
+/* Smooth transitions for all interactive elements */
+.btn,
+.input,
+.textarea,
+.select,
+.card {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Enhanced card hover effects */
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Better form control spacing */
+.form-control {
+  margin-bottom: 0.5rem;
+}
+
+/* Enhanced button styles */
+.btn {
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* Loading button styles */
+.btn.loading {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Better alert styles */
+.alert {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
