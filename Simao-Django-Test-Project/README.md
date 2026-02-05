@@ -1,6 +1,6 @@
 # Task Manager Application
 
-**Developer:** Samuel Godad   
+**Developer:** Samuel Godad    
 
 **Challenge Completion Date:** January 23, 2026
 
