@@ -7,9 +7,37 @@ from django.core.mail import send_mail
 
 from django.views.decorators.http import require_POST
 
+
+# --- Function-based view (same behaviour – for comparison while learning) ---
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+from taggit.models import Tag
+
+
+def post_lists(request, tag_slug=None):
+    post_list = Post.published.all()
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        post_list = post_list.filter(tags__in=[tag])
+    paginator = Paginator(post_list, 3)
+    page_number = request.GET.get("page", 1)
+    try:
+        posts = paginator.page(page_number)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, "blog/post/post_list.html", {"posts": posts, "tag": tag})
+
+
+# To use it: in urls.py use path('', views.post_lists, name='post_list') instead of PostListView.
+# In post_list.html use: {% include "blog/pagination.html" with page=posts %} (function view passes
+# the Page as 'posts'; ListView passes the list as 'posts' and the Page as 'page_obj').
+
+
 # --- Class-based view (in use for post list) ---
-
-
 class PostListView(ListView):
     """
     Post list view (class-based). Shows only published posts, paginated.
@@ -19,30 +47,6 @@ class PostListView(ListView):
     context_object_name = "posts"
     paginate_by = 3
     template_name = "blog/post/post_list.html"
-
-
-# --- Function-based view (same behaviour – for comparison while learning) ---
-# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-#
-# def post_lists(request):
-#     post_list = Post.published.all()
-#     paginator = Paginator(post_list, 3)
-#     page_number = request.GET.get('page', 1)
-#     try:
-#         posts = paginator.page(page_number)
-#     except PageNotAnInteger:
-#         posts = paginator.page(1)
-#     except EmptyPage:
-#         posts = paginator.page(paginator.num_pages)
-#
-#     return render(
-#         request,
-#         'blog/post/post_list.html',
-#         {'posts': posts}
-#     )
-# To use it: in urls.py use path('', views.post_lists, name='post_list') instead of PostListView.
-# In post_list.html use: {% include "blog/pagination.html" with page=posts %} (function view passes
-# the Page as 'posts'; ListView passes the list as 'posts' and the Page as 'page_obj').
 
 
 def post_detail(request, year, month, day, post):
@@ -58,10 +62,14 @@ def post_detail(request, year, month, day, post):
         publish__month=month,
         publish__day=day,
     )
-    comments =post.comments.filter(active=True)
+    comments = post.comments.filter(active=True)
     form = CommentForm()
 
-    return render(request, "blog/post/post_detail.html", {"post": post,'comments': comments, 'form': form})
+    return render(
+        request,
+        "blog/post/post_detail.html",
+        {"post": post, "comments": comments, "form": form},
+    )
 
 
 def post_share(request, post_id):
