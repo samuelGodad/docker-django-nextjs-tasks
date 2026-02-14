@@ -127,6 +127,10 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Sites framework (required by django.contrib.sites / sitemaps).
+# Run: python manage.py migrate (creates default site id=1).
+# For local dev, set that site's domain to 127.0.0.1:8000 in Admin > Sites, or run the command below.
+SITE_ID = 1
 
 # Email server configuration (Gmail SMTP)
 EMAIL_HOST = "smtp.gmail.com"
