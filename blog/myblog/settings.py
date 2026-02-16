@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'django.contrib.postgres',  # For PostgreSQL-specific features (e.g., full-text search, JSONField)
     "taggit",
     "django.contrib.sites",
     "django.contrib.sitemaps",
